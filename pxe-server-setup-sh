@@ -34,6 +34,8 @@ cp -vp /usr/share/syslinux/{pxelinux.0,menu.c32,memdisk,mboot.c32,chain.c32} /va
 mkdir /var/lib/tftpboot/{pxelinux.cfg,networkboot}
 mkdir /var/ftp/centos6
 mkdir /var/ftp/centos7
+mkdir /var/lib/tftpboot/networkboot/centos6
+mkdir /var/lib/tftpboot/networkboot/centos7
 mkdir /tmp/centos6
 mkdir /tmp/centos7
 mv /tmp/CentOS-6* /tmp/centos6
@@ -60,15 +62,16 @@ echo "prompt 0" >> /var/lib/tftpboot/pxelinux.cfg/default
 echo "timeout 300" >> /var/lib/tftpboot/pxelinux.cfg/default
 echo "MENU TITLE ######## PXE Menu #########" >> /var/lib/tftpboot/pxelinux.cfg/default
 echo "LABEL 1" >> /var/lib/tftpboot/pxelinux.cfg/default
-echo "MENU LABEL ^1) Install CentOS 6" >> /var/lib/tftpboot/pxelinux.cfg/default
-echo "KERNEL /networkboot/vmlinuz" >> /var/lib/tftpboot/pxelinux.cfg/default
-echo "APPEND initrd=/networkboot/initrd.img inst.repo=ftp://$dhcp_ip/centos6 ks=ftp://$dhcp_ip/centos6/centos6.cfg" >> /var/lib/tftpboot/pxelinux.cfg/default
+echo "MENU LABEL ^2) Install CentOS 7" >> /var/lib/tftpboot/pxelinux.cfg/default
+echo "KERNEL /networkboot/centos7/vmlinuz" >> /var/lib/tftpboot/pxelinux.cfg/default
+echo "APPEND initrd=/networkboot/centos7/initrd.img inst.repo=ftp://$dhcp_ip/centos7 ks=ftp://$dhcp_ip/centos7/centos7.cfg" >> /var/lib/tftpboot/pxelinux.cfg/default
 echo >> /var/lib/tftpboot/pxelinux.cfg/default
 echo "LABEL 2" >> /var/lib/tftpboot/pxelinux.cfg/default
-echo "MENU LABEL ^2) Install CentOS 7" >> /var/lib/tftpboot/pxelinux.cfg/default
-echo "KERNEL /networkboot/vmlinuz" >> /var/lib/tftpboot/pxelinux.cfg/default
-echo "APPEND initrd=/networkboot/initrd.img inst.repo=ftp://$dhcp_ip/centos7 ks=ftp://$dhcp_ip/centos7/centos7.cfg" >> /var/lib/tftpboot/pxelinux.cfg/default
+echo "MENU LABEL ^1) Install CentOS 6" >> /var/lib/tftpboot/pxelinux.cfg/default
+echo "KERNEL /networkboot/centos6/vmlinuz" >> /var/lib/tftpboot/pxelinux.cfg/default
+echo "APPEND initrd=/networkboot/centos6/initrd.img inst.repo=ftp://$dhcp_ip/centos6 ks=ftp://$dhcp_ip/centos6/centos6.cfg" >> /var/lib/tftpboot/pxelinux.cfg/default
 echo >> /var/lib/tftpboot/pxelinux.cfg/default
+
 echo "LABEL 3" >> /var/lib/tftpboot/pxelinux.cfg/default
 echo "MENU LABEL ^3) Boot from Local Drive" >> /var/lib/tftpboot/pxelinux.cfg/default
 echo "localboot >> /var/lib/tftpboot/pexlinus.cfg/default"
